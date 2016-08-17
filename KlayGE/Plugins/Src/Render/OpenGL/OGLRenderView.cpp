@@ -396,7 +396,7 @@ namespace KlayGE
 			array_index_(array_index), array_size_(array_size), level_(level)
 	{
 		BOOST_ASSERT(Texture::TT_1D == texture_1d.Type());
-		BOOST_ASSERT((1 == array_size) || ((0 == array_index) && (array_size == texture_1d_.ArraySize())));
+		BOOST_ASSERT((1 == array_size) || ((0 == array_index) && (static_cast<uint32_t>(array_size) == texture_1d_.ArraySize())));
 
 		if ((array_index > 0) && (!(glloader_GL_VERSION_3_0() || glloader_GL_EXT_texture_array())))
 		{
@@ -602,7 +602,7 @@ namespace KlayGE
 			array_index_(array_index), array_size_(array_size), level_(level)
 	{
 		BOOST_ASSERT(Texture::TT_2D == texture_2d.Type());
-		BOOST_ASSERT((1 == array_size) || ((0 == array_index) && (array_size == texture_2d_.ArraySize())));
+		BOOST_ASSERT((1 == array_size) || ((0 == array_index) && (static_cast<uint32_t>(array_size) == texture_2d_.ArraySize())));
 
 		if ((array_index > 0) && (!(glloader_GL_VERSION_3_0() || glloader_GL_EXT_texture_array())))
 		{
@@ -1095,7 +1095,7 @@ namespace KlayGE
 		index_ = att - FrameBuffer::ATT_Color0;
 
 		fbo_ = checked_cast<OGLFrameBuffer*>(&fb)->OGLFbo();
-		if (face_ > 0)
+		if (face_ >= 0)
 		{
 			GLenum face = GL_TEXTURE_CUBE_MAP_POSITIVE_X + face_ - Texture::CF_Positive_X;
 			if (glloader_GL_EXT_direct_state_access())
@@ -1144,7 +1144,7 @@ namespace KlayGE
 
 		BOOST_ASSERT(att != FrameBuffer::ATT_DepthStencil);
 
-		if (face_ > 0)
+		if (face_ >= 0)
 		{
 			GLenum face = GL_TEXTURE_CUBE_MAP_POSITIVE_X + face_ - Texture::CF_Positive_X;
 			if (glloader_GL_EXT_direct_state_access())
@@ -1352,7 +1352,7 @@ namespace KlayGE
 			array_index_(array_index), array_size_(array_size), level_(level)
 	{
 		BOOST_ASSERT((Texture::TT_2D == texture.Type()) || (Texture::TT_Cube == texture.Type()));
-		BOOST_ASSERT((1 == array_size) || ((0 == array_index) && (array_size == texture.ArraySize())));
+		BOOST_ASSERT((1 == array_size) || ((0 == array_index) && (static_cast<uint32_t>(array_size) == texture.ArraySize())));
 		BOOST_ASSERT(IsDepthFormat(texture.Format()));
 
 		if ((array_index > 0) && (!(glloader_GL_VERSION_3_0() || glloader_GL_EXT_texture_array())))

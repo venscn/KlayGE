@@ -35,7 +35,7 @@ namespace KlayGE
 		void ClearStencil(int32_t stencil);
 		void ClearDepthStencil(float depth, int32_t stencil);
 
-		GLuint OGLTexture() const
+		GLuint GLTexture() const
 		{
 			return tex_;
 		}
@@ -164,6 +164,7 @@ namespace KlayGE
 	{
 	public:
 		OGLTextureCubeRenderView(Texture& texture_cube, int array_index, Texture::CubeFaces face, int level);
+		OGLTextureCubeRenderView(Texture& texture_cube, int array_index, int level);
 
 		void ClearColor(Color const & clr);
 
